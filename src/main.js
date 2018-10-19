@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import animate from 'animate.css'
 
 // router setup
 import routes from './routes/routes'
@@ -13,25 +12,17 @@ import GlobalComponents from './globalComponents'
 import GlobalDirectives from './globalDirectives'
 import Notifications from './components/NotificationPlugin'
 
+// iview 组件
+
+import 'iview/dist/styles/iview.css'
+import { Message } from 'iview'
+
+Vue.prototype.$Message = Message
+
 // MaterialDashboard plugin
 import MaterialDashboard from './material-dashboard'
 
 import Chartist from 'chartist'
-
-// 引入国际化资源
-import VueI18n from 'vue-i18n'
-import LangZhCHS from './assets/lang/zhCHS'
-import LangEn from './assets/lang/en'
-
-// 国际化配置
-Vue.use(VueI18n)
-const i18n = new VueI18n({
-  locale: 'zhCHS',
-  messages: {
-    'en': LangEn,
-    'zhCHS': LangZhCHS,
-  }
-});
 
 // configure router
 const router = new VueRouter({
@@ -44,7 +35,6 @@ Vue.use(MaterialDashboard)
 Vue.use(GlobalComponents)
 Vue.use(GlobalDirectives)
 Vue.use(Notifications)
-Vue.use(animate)
 
 // global library setup
 Object.defineProperty(Vue.prototype, '$Chartist', {
@@ -58,7 +48,6 @@ new Vue({
   el: '#app',
   render: h => h(App),
   router,
-  i18n,
   data: {
     Chartist: Chartist
   }

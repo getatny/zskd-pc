@@ -1,32 +1,37 @@
 <template>
   <div id="register-page">
+    <div class="change-register-method" @click="changeRegisterMethod">
+      当前账户类型为 {{ registerBtn }}，点击切换
+    </div>
+
     <div id="register-form">
       <div class="tip">
-        {{ $t("message.register.tip") }}
-        <div class="login-btn" @click="loginButtonClick">{{ $t("message.login.text") }}</div>
+        已有账户？请
+        <div class="login-btn" @click="loginButtonClick">注册</div>
       </div>
 
       <div class="groups">
         <div class="input-group">
-          <label for="username">{{ $t("message.register.username") }}</label>
-          <input type="text" id="username" name="username"/>
+          <label for="username">用户名</label>
+          <AccountInput id="username" name="username"/>
         </div>
         <div class="input-group">
-          <label for="email">{{ $t("message.register.email") }}</label>
-          <input type="email" id="email" name="email"/>
+          <label for="email">电子邮箱</label>
+          <AccountInput id="email" type="email" name="email"/>
         </div>
         <div class="input-group">
-          <label for="password">{{ $t("message.register.password") }}</label>
-          <input type="password" id="password" name="password"/>
+          <label for="password">密码</label>
+          <AccountInput id="password" type="password" name="password"/>
         </div>
         <div class="input-group">
-          <label for="re-password">{{ $t("message.register.rePassword") }}</label>
-          <input type="text" id="re-password" name="rePassword"/>
+          <label for="re-password">确认密码</label>
+          <AccountInput id="re-password" type="password" name="rePassword"/>
         </div>
       </div>
 
       <div class="btns">
-        <button type="button" class="register-btn">{{ $t("message.register.text") }}
+        <button type="button" class="register-btn">
+          {{ registerBtn }}
           <md-icon class="register-icon">arrow_right_alt</md-icon>
         </button>
       </div>
@@ -35,11 +40,37 @@
 </template>
 
 <script>
+  import AccountInput from '../../components/Account/AccountInput'
+
   export default {
     name: "RegisterPage",
     methods: {
       loginButtonClick() {
         this.$emit('login-button-click');
+      },
+      changeRegisterMethod() {
+        this.registerType = this.registerType === 0 ? 1 : 0
+        this.$Message.success({
+          content: '注册类型切换成功',
+          duration: 2.5
+        });
+      }
+    },
+    data() {
+      return {
+        registerType: 0
+      }
+    },
+    components: {
+      AccountInput
+    },
+    computed: {
+      registerBtn() {
+        if (this.registerType === 0) {
+          return '学生注册'
+        } else {
+          return '企业注册'
+        }
       }
     }
   }
@@ -55,6 +86,20 @@
     background #fff
     height 100%
     position relative
+
+    .change-register-method {
+      position absolute
+      top 0
+      left 50%
+      transform translateX(-50%)
+      padding 10px 20px
+      background #1257b5
+      color #fff
+      font-size 16px
+      border-bottom-left-radius 20px
+      border-bottom-right-radius 20px
+      cursor pointer
+    }
 
     #register-form {
       width 65%
@@ -93,28 +138,6 @@
           margin-bottom 10px
           font-size 15px
           padding-left 30px
-        }
-
-        input {
-          width: 100%
-          height: 45px
-          box-sizing border-box
-          padding 10px 20px /*10px 40px*/
-          border 1px solid #ccc
-          box-shadow 0 5px 25px -10px #aaa
-          border-radius 22.5px
-          margin-bottom 15px
-          font-size 15px
-          letter-spacing 2px
-          color #5a5c5b
-
-          &::-webkit-input-placeholder {
-            color: #c9c9c9
-          }
-
-          &:focus {
-            border 1px solid #b6b7b2
-          }
         }
       }
 

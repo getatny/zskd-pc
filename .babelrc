@@ -17,6 +17,13 @@
           "src": "./src"
         }
       }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "iview",
+        "libraryDirectory": "src/components"
+      }
     ]
   ]
 }

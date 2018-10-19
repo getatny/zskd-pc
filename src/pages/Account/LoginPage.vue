@@ -1,21 +1,22 @@
 <template>
   <div id="login-page">
     <div id="login-form">
-      <div class="tip1">{{ $t('message.login.tip1') }}</div>
+      <div class="tip1">请输入您的用户名和密码进行登录。</div>
       <div class="tip2">
-        {{ $t('message.login.tip2') }}
-        <div class="register-btn" @click="registerButtonClick">{{ $t("message.register.text") }}</div>
+        如果您没有任何账号的话，请
+        <div class="register-btn" @click="registerButtonClick">注册</div>
       </div>
       <div class="username">
-        <input type="text" name="username" placeholder="USERNAME"/>
+        <AccountInput name="username" place-holder="USERNAME"/>
         <div class="identify">
           教
           <md-tooltip md-direction="top">当前账户身份：教</md-tooltip>
         </div>
       </div>
-      <input type="password" name="password" placeholder="PASSWORD"/>
+      <AccountInput type="password" name="password" place-holder="PASSWORD"/>
       <div class="btns">
-        <button type="button" class="login-btn">{{ $t("message.login.text") }}
+        <button type="button" class="login-btn">
+          登录
           <md-icon class="login-icon">arrow_right_alt</md-icon>
         </button>
       </div>
@@ -24,12 +25,17 @@
 </template>
 
 <script>
+  import AccountInput from '../../components/Account/AccountInput'
+
   export default {
     name: "LoginPage",
     methods: {
       registerButtonClick() {
         this.$emit('register-button-click')
       }
+    },
+    components: {
+      AccountInput
     }
   }
 </script>
@@ -93,28 +99,6 @@
         position absolute
         top 10px
         right 10px
-      }
-    }
-
-    input {
-      width: 100%
-      height: 45px
-      box-sizing border-box
-      padding 10px 20px /*10px 40px*/
-      border 1px solid #ccc
-      box-shadow 0 5px 25px -10px #aaa
-      border-radius 22.5px
-      margin-bottom 15px
-      font-size 15px
-      letter-spacing 2px
-      color #5a5c5b
-
-      &::-webkit-input-placeholder {
-        color: #c9c9c9
-      }
-
-      &:focus {
-        border 1px solid #b6b7b2
       }
     }
 
