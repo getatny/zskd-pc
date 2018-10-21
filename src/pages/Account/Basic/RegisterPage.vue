@@ -7,26 +7,22 @@
     <div id="register-form">
       <div class="tip">
         已有账户？请
-        <div class="login-btn" @click="loginButtonClick">注册</div>
+        <div class="login-btn" @click="loginButtonClick">登录</div>
       </div>
 
       <div class="groups">
-        <div class="input-group">
-          <label for="username">用户名</label>
+        <InputGroup label-for="username" text="用户名" class="input-group">
           <AccountInput id="username" name="username"/>
-        </div>
-        <div class="input-group">
-          <label for="email">电子邮箱</label>
+        </InputGroup>
+        <InputGroup label-for="email" text="电子邮箱" class="input-group">
           <AccountInput id="email" type="email" name="email"/>
-        </div>
-        <div class="input-group">
-          <label for="password">密码</label>
+        </InputGroup>
+        <InputGroup label-for="password" text="密码" class="input-group">
           <AccountInput id="password" type="password" name="password"/>
-        </div>
-        <div class="input-group">
-          <label for="re-password">确认密码</label>
+        </InputGroup>
+        <InputGroup label-for="re-password" text="确认密码" class="input-group">
           <AccountInput id="re-password" type="password" name="rePassword"/>
-        </div>
+        </InputGroup>
       </div>
 
       <div class="btns">
@@ -40,7 +36,8 @@
 </template>
 
 <script>
-  import AccountInput from '../../components/Account/AccountInput'
+  import AccountInput from '../../../components/Account/AccountInput'
+  import InputGroup from '../../../components/Account/AccountInputGroup'
 
   export default {
     name: "RegisterPage",
@@ -62,7 +59,8 @@
       }
     },
     components: {
-      AccountInput
+      AccountInput,
+      InputGroup
     },
     computed: {
       registerBtn() {
@@ -77,7 +75,7 @@
 </script>
 
 <style scoped lang="stylus">
-  .opacity #register-form {
+  .opacity #register-form, .opacity .change-register-method {
     opacity 0
   }
 
@@ -125,19 +123,6 @@
             color #1257b5
             border-color #1257b5
           }
-        }
-      }
-
-      .input-group {
-        width 50%
-        float left
-        box-sizing border-box
-
-        label {
-          display block
-          margin-bottom 10px
-          font-size 15px
-          padding-left 30px
         }
       }
 

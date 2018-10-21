@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import AccountInput from '../../components/Account/AccountInput'
+  import AccountInput from '../../../components/Account/AccountInput'
 
   export default {
     name: "LoginPage",

@@ -31,7 +31,8 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "2.5.16",
-    "babel-plugin-import": "^1.10.0"
+    "babel-plugin-import": "^1.10.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0"
   },
   "postcss": {
     "plugins": {

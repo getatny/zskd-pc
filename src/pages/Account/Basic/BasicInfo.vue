@@ -3,11 +3,11 @@
     <div class="wrapper">
       <div class="left">
         <div class="logo" ref="logo" @click="returnToIndex">
-          <img src="../../assets/img/logo-white.png" alt="logo"/>
+          <img src="../../../assets/img/logo-white.png" alt="logo"/>
           <md-tooltip md-direction="top">返回首页</md-tooltip>
         </div>
         <div class="logo-mini" ref="logoMini" @click="returnToIndex">
-          <img src="../../assets/img/logo-white-mini.png" alt="logo-mini"/>
+          <img src="../../../assets/img/logo-white-mini.png" alt="logo-mini"/>
           <md-tooltip md-direction="right">返回首页</md-tooltip>
         </div>
       </div>
@@ -20,7 +20,7 @@
 
 <script>
   export default {
-    name: "AccountPage",
+    name: "BasicInfo",
     data() {
       return {
         isOpacity: false
@@ -57,13 +57,13 @@
         // 执行动画
         this.toRegisterAnimation();
         // 切换路由
-        this.$router.push({name: 'register'});
+        this.$router.push('/register');
       },
       changeToLogin() {
         // 隐藏right内容
         this.isOpacity = true;
         this.toLoginAnimation();
-        this.$router.push({name: 'login'});
+        this.$router.push('/login');
         setTimeout(() => {
           this.isOpacity = false;
         }, 360);
@@ -81,9 +81,9 @@
         }
 
         // 判断$route.name的值，决定当前将页面切换到何种状态
-        if (route === 'login') {
+        if (route === 'Login') {
           this.toLoginAnimation()
-        } else if (route === 'register') {
+        } else if (route === 'Register') {
           this.toRegisterAnimation()
         }
       },
@@ -104,29 +104,25 @@
 
 <style scoped lang="stylus">
   #account-page {
-    background: #ebece7
-    position relative
-    top 0
-    left 0
-    width 100vw
-    height 100vh
+    width 55vw
+    height: 500px
+    border-radius 20px
+    display inline-block
+    position absolute
+    top 50%
+    left 50%
+    margin-top -250px
+    margin-left -27.5vw
     overflow hidden
+    box-shadow 0 15px 70px -15px #888
+    background #fff
 
     .wrapper {
-      width 55vw
-      height: 500px
-      border-radius 20px
-      display inline-block
-      position absolute
-      top 50%
-      left 50%
-      transform translate(-50%, -50%)
-      overflow hidden
-      box-shadow 0 15px 70px -15px #888
-      background #fff
+      width 100%
+      height 100%
 
       .left {
-        background-image url("../../assets/img/login-bg.gif")
+        background-image url("../../../assets/img/login-bg.gif")
         background-position center
         background-size cover
         width 50%

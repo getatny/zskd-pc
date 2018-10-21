@@ -69,19 +69,34 @@ const routes = [
   },
   {
     path: '/account',
-    name: 'account',
-    component: () => import('src/pages/Account/AccountPage.vue'),
-    redirect: '/Account/login',
+    name: 'Account',
+    component: () => import('src/pages/Account/FramePage.vue'),
     children: [
       {
-        path: 'login',
-        name: 'login',
-        component: () => import('src/pages/Account/LoginPage.vue')
+        path: 'basic',
+        name: 'Basic',
+        component: () => import('src/pages/Account/Basic/BasicInfo.vue'),
+        redirect: '/login',
+        children: [
+          {
+            path: 'login',
+            name: 'Login',
+            component: () => import('src/pages/Account/Basic/LoginPage.vue'),
+            alias: '/login'
+          },
+          {
+            path: 'register',
+            name: 'Register',
+            component: () => import('src/pages/Account/Basic/RegisterPage.vue'),
+            alias: '/register'
+          }
+        ]
       },
       {
-        path: 'register',
-        name: 'register',
-        component: () => import('src/pages/Account/RegisterPage.vue')
+        path: 'company-detail',
+        name: 'CompanyDetail',
+        component: () => import('src/pages/Account/Detail/CompanyDetail.vue'),
+        alias: '/register/company-detail'
       }
     ]
   },
