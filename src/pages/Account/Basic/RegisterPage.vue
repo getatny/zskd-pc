@@ -1,6 +1,6 @@
 <template>
   <div id="register-page">
-    <div class="change-register-method" @click="changeRegisterMethod">
+    <div class="change-register-method" :class="{'company-register': registerType === 1}" @click="changeRegisterMethod">
       当前账户类型为 {{ registerBtn }}，点击切换
     </div>
 
@@ -26,7 +26,7 @@
       </div>
 
       <div class="btns">
-        <button type="button" class="register-btn">
+        <button type="button" class="register-btn" :class="{'company-register': registerType === 1}">
           {{ registerBtn }}
           <md-icon class="register-icon">arrow_right_alt</md-icon>
         </button>
@@ -97,6 +97,11 @@
       border-bottom-left-radius 20px
       border-bottom-right-radius 20px
       cursor pointer
+      transition background .3s ease-in-out
+    }
+
+    .company-register {
+      background #1b5e20
     }
 
     #register-form {
@@ -154,6 +159,23 @@
           font-weight bold
           transition all .35s ease-in-out
           box-shadow 0 10px 20px -10px #1257b5
+
+          &.company-register {
+            background #1b5e20
+            border 1px solid #1b5e20
+            box-shadow 0 10px 20px -10px #1b5e20
+          }
+
+          &.company-register:hover {
+            background #fff
+            color #1b5e20
+            box-shadow 0 10px 25px -10px #1b5e20
+
+            .register-icon {
+              margin-left 10px
+              color #1b5e20
+            }
+          }
 
           .register-icon {
             font-size 15px

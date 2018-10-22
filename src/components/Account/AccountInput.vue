@@ -1,5 +1,5 @@
 <template>
-  <input :type="type" :name="name" :placeholder="placeHolder"/>
+  <input :type="type" :name="name" :placeholder="placeHolder" @input="inputValue" v-model="value"/>
 </template>
 
 <script>
@@ -17,6 +17,16 @@
       placeHolder: {
         type: String,
         default: ""
+      }
+    },
+    data() {
+      return {
+        value: ''
+      }
+    },
+    methods: {
+      inputValue() {
+        this.$emit('input', this.value)
       }
     }
   }
