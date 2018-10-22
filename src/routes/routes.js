@@ -103,7 +103,17 @@ const routes = [
   {
     path: '/admin',
     name: 'admin',
-    component: () => import('src/pages/Layout/DashboardLayout.vue')
+    component: () => import('src/pages/Layout/DashboardLayout.vue'),
+    children: [
+      {
+        path: 'calendar',
+        name: 'Calendar',
+        component: () => import('src/pages/Admin/CalendarPage.vue'),
+        meta: {
+          title: '招聘日历'
+        }
+      }
+    ]
   }
 ]
 

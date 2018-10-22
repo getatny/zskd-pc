@@ -47,6 +47,12 @@
             bottom: false
           },
           {
+            title: '招聘日历',
+            path: '/admin/calendar',
+            icon: 'calendar_today',
+            bottom: false
+          },
+          {
             title: '关于我们',
             path: '/admin/about',
             icon: 'favorite',

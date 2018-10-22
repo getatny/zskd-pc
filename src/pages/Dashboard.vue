@@ -116,13 +116,7 @@
 </template>
 
 <script>
-import {
-  StatsCard,
-  ChartCard,
-  NavTabsCard,
-  NavTabsTable,
-  OrderedTable
-} from '@/components'
+import { StatsCard, ChartCard, NavTabsCard, NavTabsTable, OrderedTable } from 'src/components'
 
 export default{
   components: {
