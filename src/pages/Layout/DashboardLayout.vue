@@ -4,7 +4,8 @@
 
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link v-for="(menu, index) in menus" :to='menu.path' :key="index" :class="{'active-pro': menu.bottom}">
+      <sidebar-link v-for="(menu, index) in menus" :to='menu.path' :key="index"
+                    :class="{'active-pro': menu.bottom === true}">
         <md-icon>{{ menu.icon }}</md-icon>
         <p>{{ menu.title }}</p>
       </sidebar-link>
@@ -13,7 +14,6 @@
     <div class="main-panel">
       <top-navbar />
       <dashboard-content />
-      <content-footer v-if="!$route.meta.hideFooter" />
     </div>
   </div>
 </template>
@@ -37,20 +37,22 @@
           {
             title: 'Dashboard',
             path: '/dashboard',
-            icon: 'dashboard',
-            bottom: false
+            icon: 'dashboard'
           },
           {
-            title: 'test',
+            title: '用户管理',
             path: '/user',
-            icon: 'user',
-            bottom: false
+            icon: 'supervised_user_circle'
           },
           {
             title: '招聘日历',
             path: '/admin/calendar',
-            icon: 'calendar_today',
-            bottom: false
+            icon: 'calendar_today'
+          },
+          {
+            title: '常用页面',
+            path: '/admin/pages',
+            icon: 'laptop_chromebook'
           },
           {
             title: '关于我们',

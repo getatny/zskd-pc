@@ -15,9 +15,20 @@ import Notifications from './components/NotificationPlugin'
 // iview 组件
 
 import 'iview/dist/styles/iview.css'
-import { Message } from 'iview'
+import { Message, Form, Input, Select, FormItem, Option, Modal, Row, Col, Table, Tag } from 'iview'
 
 Vue.prototype.$Message = Message
+Vue.prototype.$Modal = Modal
+Vue.component('Form', Form)
+Vue.component('FormItem', FormItem)
+Vue.component('Input', Input)
+Vue.component('Select', Select)
+Vue.component('Option', Option)
+Vue.component('Modal', Modal)
+Vue.component('Row', Row)
+Vue.component('Col', Col)
+Vue.component('Table', Table)
+Vue.component('Tag', Tag)
 
 // MaterialDashboard plugin
 import MaterialDashboard from './material-dashboard'

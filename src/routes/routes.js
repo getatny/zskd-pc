@@ -112,6 +112,14 @@ const routes = [
         meta: {
           title: '招聘日历'
         }
+      },
+      {
+        path: 'pages',
+        name: 'Pages',
+        component: () => import('src/pages/Admin/UsefulPage.vue'),
+        meta: {
+          title: '常用页面'
+        }
       }
     ]
   }

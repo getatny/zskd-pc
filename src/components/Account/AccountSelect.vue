@@ -7,8 +7,6 @@
 </template>
 
 <script>
-  import {Select, Option} from 'iview'
-
   export default {
     name: 'AccountSelect',
     props: {
@@ -24,10 +22,6 @@
       changeData() {
         this.$emit('input', this.selectItem)
       }
-    },
-    components: {
-      Select,
-      Option
     },
     mounted() {
       this.selectItem = this.value

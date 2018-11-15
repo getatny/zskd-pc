@@ -7,75 +7,70 @@
             <p class="category">集中展示近期校级宣讲会、双选会日程</p>
           </md-card-header>
           <md-card-content>
-            <full-calendar :events="calendarEvents" :config="calendarConfig" @event-created="showCreateEventWindow = true" />
+            <full-calendar :events="calendarEvents" :config="calendarConfig"
+                           @event-created="openCreateEventWindow"
+                           @event-drop="existEventChange"
+                           @event-selected="eventSelect"/>
           </md-card-content>
         </md-card>
       </div>
     </div>
 
-    <md-dialog :md-active.sync="showCreateEventWindow">
-      <md-dialog-title>添加日程</md-dialog-title>
+    <Modal v-model="showCreateEventWindow" title="添加日程" class-name="vertical-center-modal"
+           @on-cancel="cancelCreateEvent" @on-ok="createEvent">
+      <Form ref="createForm" v-model="createEventData" label-position="top">
+        <FormItem label="日程标题" prop="event-title">
+          <Input v-model="createEventData.title"/>
+        </FormItem>
 
-      <md-dialog-content>
-        <form class="md-layout">
-          <div class="md-layout">
-            <div class="md-layout-item md-size-200">
-              <md-field :class="{'md-invalid': !createValid.title}">
-                <label for="event-title">日程标题</label>
-                <md-input name="eventTitle" id="event-title" v-model="createEventData.title" :disabled="creating"/>
-                <span class="md-error" v-if="!createValid.title">日程标题必须输入</span>
-              </md-field>
-            </div>
-          </div>
-          <div class="md-layout">
-            <div class="md-layout-item md-size-200">
-              <md-field :class="{'md-invalid': !createValid.start}">
-                <label for="event-start">日程开始日期</label>
-                <md-input id="event-start" v-model="createEventData.start" :disabled="creating" ref="startTime"/>
-                <span class="md-error" v-if="!createValid.start">日程开始日期必须输入</span>
-              </md-field>
-            </div>
-          </div>
-          <div class="md-layout">
-            <div class="md-layout-item md-size-200">
-            <md-field>
-              <label for="event-time">具体时间</label>
-                <md-select name="eventTime" id="event-time" ref="time">
-                  <md-option value="allDay">全天</md-option>
-                  <md-option value="allAM">一上午</md-option>
-                  <md-option value="allPM">一下午</md-option>
-                  <md-option value="one">1-2节</md-option>
-                  <md-option value="two">3-4节</md-option>
-                  <md-option value="three">5-6节</md-option>
-                  <md-option value="four">7-8节</md-option>
-                  <md-option value="five">9-11节</md-option>
-                </md-select>
-              </md-field>
-            </div>
-          </div>
-          <div class="md-layout">
-            <div class="md-layout-item md-xsmall-100">
-              <md-field>
-                <label for="event-color">日程颜色</label>
-                <md-select v-model="createEventData.className" name="eventColor" id="event-color">
-                  <md-option value="event-greydefault">默认（灰色）</md-option>
-                  <md-option value="event-red">红色</md-option>
-                  <md-option value="event-rose">玫色</md-option>
-                  <md-option value="event-green">绿色</md-option>
-                  <md-option value="event-blue">蓝色</md-option>
-                  <md-option value="event-orange">橙色</md-option>
-                </md-select>
-              </md-field>
-            </div>
-          </div>
-        </form>
-      </md-dialog-content>
-
-      <md-dialog-actions>
-        <md-button class="md-simple" @click="showCreateEventWindow = false">取消</md-button>
-        <md-button class="md-success" @click="createEvent">保存</md-button>
-      </md-dialog-actions>
-    </md-dialog>
+        <Row :gutter="15">
+          <Col span="12">
+            <FormItem label="时段" prop="event-time">
+              <Select v-model="createEventData.eventTimeFlag">
+                <Option value="allDay">全天</Option>
+                <Option value="allAM">一上午</Option>
+                <Option value="allPM">一下午</Option>
+                <Option value="one">1-2小节</Option>
+                <Option value="two">3-4小节</Option>
+                <Option value="three">5-6小节</Option>
+                <Option value="four">7-8小节</Option>
+                <Option value="five">9-12小节</Option>
+              </Select>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem label="日程颜色" prop="event-color">
+              <Select v-model="createEventData.className">
+                <Option value="event-grey" label="灰色">
+                  <span>灰色</span>
+                  <span style="float:right;width:15px;height:15px;background:#999"></span>
+                </Option>
+                <Option value="event-orange" label="橙色">
+                  <span>橙色</span>
+                  <span style="float:right;width:15px;height:15px;background:#ff9800"></span>
+                </Option>
+                <Option value="event-green" label="绿色">
+                  <span>绿色</span>
+                  <span style="float:right;width:15px;height:15px;background:#4caf50"></span>
+                </Option>
+                <Option value="event-blue" label="蓝色">
+                  <span>蓝色</span>
+                  <span style="float:right;width:15px;height:15px;background:#00dcb4"></span>
+                </Option>
+                <Option value="event-red" label="红色">
+                  <span>红色</span>
+                  <span style="float:right;width:15px;height:15px;background:#f44336"></span>
+                </Option>
+                <Option value="event-rose" label="玫色">
+                  <span>玫色</span>
+                  <span style="float:right;width:15px;height:15px;background:#e91e63"></span>
+                </Option>
+              </Select>
+            </FormItem>
+          </Col>
+        </Row>
+      </Form>
+    </Modal>
   </div>
 </template>
 
@@ -93,7 +88,14 @@
       return {
         calendarConfig: {
           defaultView: 'month',
-          locale: 'zh-cn'
+          locale: 'zh-cn',
+          eventLimit: true,
+          views: {
+            month: {
+              eventLimit: 4
+            }
+          },
+          editable: false
         },
         calendarEvents: {
           events: [
@@ -111,26 +113,98 @@
           title: null,
           start: null,
           allDay: null,
-          className: null
-        },
-        createValid: {
-          // true表示验证通过
-          title: true,
-          start: true
-        },
-        creating: false
+          className: "event-grey",
+          eventTimeFlag: 'allDay'
+        }
       }
     },
     methods: {
       createEvent() {
-        this.calendarEvents.events.push(this.createEventData)
+        let time = this.createEventData.eventTimeFlag
+
+        if (time === 'allDay') {
+          this.createEventData.allDay = true
+        } else if (time === 'allAM') {
+          this.createEventData.end = this.createEventData.start + "T11:40:00"
+          this.createEventData.start = this.createEventData.start + "T08:00:00"
+        } else if (time === 'allPM') {
+          this.createEventData.end = this.createEventData.start + "T17:10:00"
+          this.createEventData.start = this.createEventData.start + "T13:30:00"
+        } else if (time === 'one') {
+          this.createEventData.end = this.createEventData.start + "T09:35:00"
+          this.createEventData.start = this.createEventData.start + "T08:00:00"
+        } else if (time === 'two') {
+          this.createEventData.end = this.createEventData.start + "T11:40:00"
+          this.createEventData.start = this.createEventData.start + "T10:05:00"
+        } else if (time === 'three') {
+          this.createEventData.end = this.createEventData.start + "T15:05:00"
+          this.createEventData.start = this.createEventData.start + "T13:30:00"
+        } else if (time === 'four') {
+          this.createEventData.end = this.createEventData.start + "T17:10:00"
+          this.createEventData.start = this.createEventData.start + "T15:35:00"
+        } else if (time === 'five') {
+          this.createEventData.end = this.createEventData.start + "T21:30:00"
+          this.createEventData.start = this.createEventData.start + "T18:00:00"
+        }
+
+        this.calendarEvents.events.push(
+          JSON.parse(JSON.stringify(this.createEventData))
+        )
         this.clearCreateEventForm()
       },
       clearCreateEventForm() {
         this.createEventData.title = null
         this.createEventData.start = null
         this.createEventData.allDay = null
-        this.createEventData.className = null
+        this.createEventData.className = "event-grey"
+      },
+      cancelCreateEvent() {
+        this.showCreateEventWindow = false
+        this.clearCreateEventForm()
+      },
+      openCreateEventWindow(event) {
+        this.createEventData.start = event.start.format()
+        this.createEventData.end = event.end.format()
+        this.showCreateEventWindow = true
+      },
+      existEventChange() {
+
+      },
+      eventSelect(event) {
+        let timeArea = ""
+
+        if (event.allDay === true) {
+          timeArea = "时段：全天"
+        } else {
+          let startTime = event.start.hour()
+          let endTime = event.end.hour()
+
+          if (startTime === 8) {
+            if (endTime === 11) {
+              timeArea = "时段：一上午"
+            } else {
+              timeArea = "时段：1-2小节"
+            }
+          } else if (startTime === 10) {
+            timeArea = "时段：3-4小节"
+          } else if (startTime === 13) {
+            if (endTime === 17) {
+              timeArea = "时段：一下午"
+            } else if (endTime === 15) {
+              timeArea = "时段：5-6小节"
+            }
+          } else if (startTime ===15) {
+            timeArea = "时段：7-8小节"
+          } else if (startTime === 18) {
+            timeArea = "时段：9-12小节"
+          }
+        }
+
+        this.$Modal.info({
+          title: event.title,
+          content: "<p style='margin-top: 20px'>开始日期：" + event.start.stripTime().format()
+            + "</p><p>结束日期：" + event.end.stripTime().format() + "</p>" + timeArea
+        })
       }
     }
   }
@@ -180,6 +254,16 @@
     &.event-red {
       background-color: #f44336;
       box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(244,67,54,.4);
+    }
+  }
+
+  .vertical-center-modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .ivu-modal{
+      top: 0;
     }
   }
 </style>

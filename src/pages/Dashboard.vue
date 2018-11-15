@@ -4,12 +4,14 @@
       <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="green">
           <template slot="header">
-            <md-icon >store</md-icon>
+            <md-icon>face</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Revenue</p>
-            <h3 class="title">$34,245</h3>
+            <p class="category">用户数</p>
+            <h3 class="title">1,200
+              <small>人</small>
+            </h3>
           </template>
 
           <template slot="footer">
@@ -23,13 +25,13 @@
       <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="orange">
           <template slot="header">
-            <md-icon >content_copy</md-icon>
+            <md-icon>business</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Used Space</p>
-            <h3 class="title">49/50
-                <small>GB</small>
+            <p class="category">企业数</p>
+            <h3 class="title">402
+                <small>家</small>
             </h3>
           </template>
 
@@ -44,12 +46,12 @@
       <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="red">
           <template  slot="header">
-            <md-icon >info_outline</md-icon>
+            <md-icon >contacts</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Fixed Issues</p>
-            <h3 class="title">75</h3>
+            <p class="category">岗位数</p>
+            <h3 class="title">1000</h3>
           </template>
 
           <template slot="footer">
@@ -63,12 +65,14 @@
       <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="blue">
           <template  slot="header">
-            <i class="fab fa-twitter"></i>
+            <md-icon>outlined_flag</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Folowers</p>
-            <h3 class="title">+245</h3>
+            <p class="category">近期宣讲会</p>
+            <h3 class="title">12
+              <small>场</small>
+            </h3>
           </template>
 
           <template slot="footer">
@@ -82,8 +86,8 @@
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
         <md-card>
           <md-card-header data-background-color="orange">
-            <h4 class="title">Employees Stats</h4>
-            <p class="category">New employees on 15th September, 2016</p>
+            <h4 class="title">企业申请</h4>
+            <p class="category">最新企业宣讲会、招聘信息发布申请</p>
           </md-card-header>
           <md-card-content>
             <ordered-table table-header-color="orange"></ordered-table>
